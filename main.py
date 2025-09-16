@@ -13,12 +13,16 @@ data = load_ai_usage_data()
 print(data['SessionLengthMin'])
 print(data.head())
 
+## dropping SessionID and cutting SessionDate to year only
+X = data.drop(columns=["UsedAgain", "SessionID"])
+y = data["UsedAgain"].astype(int)  # True/False -> 1/0
+
 ### percentage of students returning to AI depending on their SatisfactionRating
 used_again_pct = (
-    data.groupby('SatisfactionRating')['UsedAgain']
+    data.groupby('AI_AssistanceLevel')['UsedAgain']
       .mean() * 100
 )
-# plt.plot(used_again_pct)
+plt.plot(used_again_pct)
 
 print(used_again_pct)
 
@@ -38,32 +42,51 @@ df_false = data[data['UsedAgain'] == False]
 # plt.legend()
 # plt.show()
 
-### Histogram of students' overall Satisfaction rating
-#plt.hist(data['SatisfactionRating'], alpha=0.5, label='All Students')
+# ## Histogram of students' overall Satisfaction rating
+# plt.hist(data['SatisfactionRating'], alpha=0.5, label='All Students')
 
-### Histogram of only those who returned to AI
-#plt.hist(data[data['UsedAgain'] == True]['SatisfactionRating'], 
-#        alpha=0.5, label='Used Again')
+# ## Histogram of only those who returned to AI
+# plt.hist(data[data['UsedAgain'] == True]['AI_AssistanceLevel'], 
+#        alpha=0.5, label='Used Again', color='green')
+# plt.hist(data[data['UsedAgain'] == False]['AI_AssistanceLevel'], 
+#        alpha=1, label='Used Again', color='red')
+# plt.legend()
+
+# Group by satisfaction rating
+percentages = (
+    data.groupby('AI_AssistanceLevel')["UsedAgain"]
+        .mean() * 100   # mean of True/False is % True
+)
+
+# Plot as bar chart
+percentages.plot(kind="bar")
+
+plt.ylabel("% Used Again")
+plt.xlabel("Satisfaction Rating")
+plt.title("Percentage of 'Used Again' by Satisfaction Rating")
+plt.show()
 
 ### randomly sample 100 entries
 
-sampled_data = data.sample(n=1000, random_state=42)
+sampled_data = data.sample(n=100, random_state=42)
 
-sample_true = sampled_data[sampled_data['UsedAgain'] == True]
-sample_false = sampled_data[sampled_data['UsedAgain'] == False]
-plt.plot(sample_true['SatisfactionRating'], sample_true['TotalPrompts'], 'o', color='blue', label='Used Again')
-plt.plot(sample_false['SatisfactionRating'], sample_false['TotalPrompts'], 'o', color='red', label='Not Used Again')
-print(sampled_data)
+# sample_true = sampled_data[sampled_data['UsedAgain'] == True]
+# sample_false = sampled_data[sampled_data['UsedAgain'] == False]
+# plt.plot(sample_true['SatisfactionRating'], sample_true['TotalPrompts'], 'o', color='blue', label='Used Again')
+# plt.plot(sample_false['SatisfactionRating'], sample_false['TotalPrompts'], 'o', color='red', label='Not Used Again', alpha = 0.6)
+# print(sampled_data)
 
-sns.lmplot(
-    data=sampled_data,
-    x="SatisfactionRating",
-    y="SessionLengthMin",
-    col="Discipline",
-      hue="UsedAgain",
-    palette={True: "blue", False: "red"},
-    fit_reg=False
-)
+# sns.lmplot(
+#     data=sampled_data,
+#     x="AI_AssistanceLevel",
+#     y="TotalPrompts",
+#     col="Discipline",
+#       hue="UsedAgain",
+#     palette={True: "blue", False: "red"},
+#     fit_reg=False
+# )
+print("AAA")
+data.groupby('UsedAgain')['SessionLengthMin'].describe()
 
 #plt.plot(sampled_data['SatisfactionRating'], sampled_data['SessionLengthMin'], 'o')
 plt.show()
