@@ -72,7 +72,7 @@ print( X.tail(10) )
 
 ### looking at correlation of each feature
 corr_data = X.assign(UsedAgain=y)
-corr = corr_data.corr(numeric_only=True)
+corr = corr_data.corr()
 plt.figure(figsize=(10, 8))
 sns.heatmap(corr, annot=True, fmt=".2f", cmap="coolwarm", cbar=True)
 
