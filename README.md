@@ -13,7 +13,7 @@ a ML model fitted to predict whether a student comes back  to using AI as help w
 
 For data management and visualization, I have used `Pandas`, `Matplotlib` and `Seaborn` library.
 For machine learning, I have used `Scikit-learn` library.
-
+You can see full dependencies in [requirements file](./requirements.txt).
 Project purpose is strictly educational.
 
 ## Dataset
