@@ -20,7 +20,7 @@ Project purpose is strictly educational.
 Project is based on [AI Assistant Usage in Student Life](https://www.kaggle.com/datasets/ayeshasal89/ai-assistant-usage-in-student-life-synthetic) dataset which is marked by author as [MIT license](https://www.mit.edu/~amini/LICENSE.md). Dataset contains `10 000` entries and is fully complete (meaning no NULL in any cell). 
 
 ## Approach
-I have started with visualizing data in multiple ways, but none of them showed linear correlation with my label. I was especially concerned of none correlation with personal student's `1-5` rate of AI's help. Correlation matrix showed that there is linear correlation with only one feature - categorical `FinalOutcome` of the session. It seems, the better the result, the more willing the students were to use AI in the future. Because the feature has values that can be logically sorted (`Assigment completed, Idea drafted, Confused, Gave up`), I changed them into 0-4 integers. For the rest of categorical features, I used **one-hot encoding**. I also converted date of the session to number of days since first session.
+I have started by visualizing data in multiple ways, but none of them showed linear correlation with my label. I was especially concerned of none correlation with personal student's `1-5` rate of AI's help. Correlation matrix showed that there is linear correlation with only one feature - categorical `FinalOutcome` of the session. It seems, the better the result, the more willing the students were to use AI in the future. Because the feature has values that can be logically sorted (`Assigment completed, Idea drafted, Confused, Gave up`), I changed them into 0-4 integers. For the rest of categorical features, I used **one-hot encoding**. I also converted date of the session to number of days since first session.
 
 At this time, because of correlation's scores, I didn't expect much from my model. After multiple tests, I decided to go with `RandomForestClassifier` in hope of finding some non-linear correlations between features. 
 
@@ -34,7 +34,7 @@ I also compared performance across folds and between training and test sets, and
 
 My final model contains hyperparameter indicated by GridSearchCV() method and is trained on every feature I was given. 
 
-Final result, as well as my visualizations and efforts can be seen in my [model.ipynb](./model.ipynb) file.
+Final result, as well as my visualizations and efforts can be seen in [model.ipynb](./model.ipynb) file.
 
 ## Summary
 Based on what I observed, I don't think there is a way to significantly improve model's performance, but maybe I am forgetting something. If you read this (I would be suprised :D ) and have any ideas, feel free to leave your thoughts in `Issues` section.
