@@ -2,11 +2,11 @@
 
 
 ## Table of contents
-- [Overview] (#overview)
-- [Dataset] (#dataset)
-- [Approach] (#approach)
-- [Results] (#results)
-- [How to run] (#howtorun)
+- [Overview](#overview)
+- [Dataset](#dataset)
+- [Approach](#approach)
+- [Results](#results)
+- [How to run](#howtorun)
 
 ## Overview
 
