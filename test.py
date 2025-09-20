@@ -81,34 +81,3 @@ plt.show()
 # TODO
 
 
-## ! CV KFold
-
-from sklearn.model_selection import StratifiedKFold, cross_val_score
-
-rf_cv = RandomForestClassifier(
-    n_estimators=200, 
-    random_state=42
-)
-cv = StratifiedKFold(
-    n_splits=5,
-    shuffle=True,
-    random_state=42
-)
-scores = cross_val_score(
-    rf, X_train, y_train,
-    cv=cv,
-    scoring="roc_auc"
-)
-print("Cross-val ROC-AUC per fold:", scores)
-print("Mean ROC-AUC:", scores.mean())
-print("Std deviation:", scores.std())
-
-rf.fit(X_train, y_train)
-
-y_pred = rf.predict(X_test)
-y_proba = rf.predict_proba(X_test)[:, 1]
-
-print("\nFinal test set results:")
-print("ROC-AUC:", roc_auc_score(y_test, y_proba))
-#print("Accuracy:", accuracy_score(y_test, y_pred))
-print("\nClassification report:\n", classification_report(y_test, y_pred))
