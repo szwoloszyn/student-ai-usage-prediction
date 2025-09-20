@@ -35,3 +35,6 @@ I also compared performance across folds and between training and test sets, and
 My final model contains hyperparameter indicated by GridSearchCV() method and is trained on every feature I was given. 
 
 Final result, as well as my visualizations and efforts can be seen in my [model.ipynb](./model.ipynb) file.
+
+## Summary
+Based on what I observed, I don't think there is a way to significantly improve model's performance, but maybe I am forgetting something. If you read this (I would be suprised :D ) and have any ideas, feel free to leave your thoughts in `Issues` section.
